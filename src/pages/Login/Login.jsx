@@ -1,24 +1,36 @@
-import React from 'react'
 import './Login.css'
+import logo from '../../assets/streamOn.png'
+import { useState } from 'react'
 const Login = () => {
+   const [signState, setSignState] = useState("Sign In");
    return (
       <div className='login'>
-         <p className='logo'></p>
+         <img src={logo} className='login-logo' alt="logo" />
          <div className='login-form'>
-            <h1>Sign Up </h1>
+            <h1>{signState}</h1>
             <form action="">
-               <input type="text" placeholder='Enter full name' />
+               {
+                  signState === "Sign Up" ? <input type="text" placeholder='Enter full name' /> : <></>
+               }
                <input type="email" placeholder='Enter your email' />
                <input type="password" placeholder='Password' />
-               <button>Sign Up</button>
+               <button>{signState}</button>
                <div className='form-help'>
                   <div className='remember'>
                      <input type="checkbox" id="remember" />
                      <label htmlFor="">Remember Me </label>
                   </div>
-                  <p>Need help?</p>
+                  <p>Need Help?</p>
                </div>
             </form>
+            <div className="form-switch">
+               {
+                  signState === "Sign In" ? <p>New to streamOn ? <span onClick={()=>setSignState('Sign Up')}>Sign Up Now</span></p>
+                     :
+                     <p>Already have an account?<span onClick={()=>setSignState('Sign In')}>Sign In Now</span></p>
+
+               }
+            </div>
          </div>
       </div>
    )
