@@ -45,7 +45,6 @@
   font-size: 1rem;
 }
 
-
 .navbar-left {
   display: flex;
   align-items: center;
@@ -109,3 +108,8 @@
 .navbar-profile:hover .dropdown {
   display: block;
 }
+
+.nav-dark {
+  background: #141414;
+}
+  

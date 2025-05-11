@@ -4,10 +4,28 @@ import bell_icon from '../../assets/bell_icon.svg'
 import profile_img from '../../assets/profile_img.png'
 import caret_icon from '../../assets/caret_icon.svg'
 import logo from '../../assets/streamOn.png'
+import { useEffect, useRef } from 'react'
 
 const Navbar = () => {
+   const navRef = useRef();
+   useEffect(() => {
+      const handleScroll = () => {
+         if (window.scrollY >= 80) {
+            navRef.current?.classList.add('nav-dark');
+         } else {
+            navRef.current?.classList.remove('nav-dark');
+         }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+         window.removeEventListener('scroll', handleScroll);
+      };
+   }, []);
+    
    return (
-      <div className='navbar'>
+      <div className='navbar' ref={navRef}>
          <div className='navbar-left'>
             <img className='logo' src={logo} alt="" />
             <ul>
