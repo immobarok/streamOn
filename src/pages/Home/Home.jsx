@@ -18,7 +18,7 @@ const Home = () => {
                <img src={hero_title} alt="" />
                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur, iure modi? Mollitia facilis nostrum sint pariatur minus voluptatibus!</p>
                <div className='hero-btns'>
-                  <button className='btn'> <img src={play_icon} alt="" /> Play</button>
+                  <button className='btn'> <img src={play_icon} alt="" /> Watch Now</button>
                   <button className='btn dark-btn'> <img src={info_icon} alt="" /> More Info</button>
                </div>
                <TitleCards />

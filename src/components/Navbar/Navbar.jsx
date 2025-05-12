@@ -5,6 +5,8 @@ import profile_img from '../../assets/profile_img.png'
 import caret_icon from '../../assets/caret_icon.svg'
 import logo from '../../assets/streamOn.png'
 import { useEffect, useRef } from 'react'
+import { signOut } from 'firebase/auth'
+import { logout } from '../../firebase.init'
 
 const Navbar = () => {
    const navRef = useRef();
@@ -50,7 +52,7 @@ const Navbar = () => {
                <img className='profile' src={profile_img} alt="" />
                <img className='' src={caret_icon} alt="" />
                <div className='dropdown'>
-                  <p>Sign Out of STREAMON</p>
+                  <p onClick={()=>{logout()}}>Sign Out</p>
                </div>
             </div>
          </div>
