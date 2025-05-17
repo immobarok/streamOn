@@ -3,9 +3,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Comfortaa", sans-serif !important;
 }
 body{
   background-color: #000;
   font-family: "Comfortaa", sans-serif;
   color: #ddd;
+}
+
+p{
+  font-family: "Comfortaa", sans-serif;
 }

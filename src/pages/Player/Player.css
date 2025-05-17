@@ -4,12 +4,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 70px;
 }
 
 .player img {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 78px;
+  left: 60px;
   width: 50px;
   cursor: pointer;
 }

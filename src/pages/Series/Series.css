@@ -1,0 +1,100 @@
+.series-container {
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  margin-top: 100px;
+  max-width: 76rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+ }
+ 
+ .section-title {
+  font-size: 44px;
+  margin-bottom: 7px;
+  font-weight: bold;
+ }
+ 
+ .section-hr {
+   display: block;
+   height: 2px;
+   background-color: #ff0000;
+   width: 120px;
+   margin-bottom: 20px;
+   border-radius: 4px;
+ }
+ 
+ .series-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+   gap: 35px;
+ }
+ 
+ .series-card {
+   text-decoration: none;
+   color: white;
+ }
+ 
+ .card-image-container {
+   position: relative;
+   overflow: hidden;
+   border-radius: 10px;
+ }
+ 
+ .series-poster {
+   width: 100%;
+   border-radius: 10px;
+   transition: transform 0.3s ease;
+ }
+ 
+ .card-overlay {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.7);
+   opacity: 0;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   padding: 10px;
+   transition: opacity 0.3s ease;
+ }
+ 
+ .card-title {
+   font-size: 16px;
+   margin-bottom: 4px;
+ }
+ 
+ .card-rating {
+   font-size: 14px;
+   color: #ffcc00;
+ }
+ 
+ .card-image-container:hover .card-overlay {
+   opacity: 1;
+ }
+ 
+ .pagination-controls {
+   margin-top: 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+ }
+ 
+ .pagination-controls button {
+   padding: 8px 16px;
+   border: none;
+   background-color: #ff0000;
+   color: white;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ 
+ .pagination-controls button:disabled {
+   background-color: gray;
+   cursor: not-allowed;
+ }
+ 

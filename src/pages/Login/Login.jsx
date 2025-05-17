@@ -2,7 +2,6 @@ import './Login.css';
 import logo from '../../assets/streamOn.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { login, signup } from '../../firebase.init';
 import loading_spinner from '../../assets/netflix_spinner.gif'
 
 const Login = () => {
@@ -16,11 +15,7 @@ const Login = () => {
    const userAuthHandler = async (e) => {
       e.preventDefault();
       setLoading(true)
-      if(signState==='Sign In'){
-         await login(email,password)
-      }else{
-         await signup(name,email,password)
-      }
+     
       navigate('/')
       setLoading(false)
    }
