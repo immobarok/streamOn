@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './AllMovies.css';
 import { Link } from 'react-router';
+import { useSpinner } from '../../Provider/SpinnerContext';
 
 const AllMovies = () => {
    const [movies, setMovies] = useState([]);
    const [page, setPage] = useState(1);
    const [totalPages, setTotalPages] = useState(1);
+   const { setLoading } = useSpinner();
 
    const options = {
       method: 'GET',
@@ -17,17 +19,28 @@ const AllMovies = () => {
    };
 
    useEffect(() => {
-      fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`, options)
-         .then((res) => res.json())
-         .then((res) => {
-            setMovies(res.results || []);
-            setTotalPages(res.total_pages || 1);
-         })
-         .catch((err) => {
-            console.error('Error fetching movies:', err);
+      const fetchMovies = async () => {
+         setLoading(true);
+
+         const delay = new Promise(resolve => setTimeout(resolve, 1000)); // minimum spinner time
+
+         try {
+            const res = await fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`, options);
+            const data = await res.json();
+            setMovies(data.results || []);
+            setTotalPages(data.total_pages || 1);
+         } catch (error) {
+            console.error('Error fetching movies:', error);
             setMovies([]);
-         });
+         }
+
+         await delay;
+         setLoading(false);
+      };
+
+      fetchMovies();
    }, [page]);
+   
 
    const handleNext = () => {
       if (page < totalPages) setPage((prev) => prev + 1);
@@ -59,7 +72,7 @@ const AllMovies = () => {
                   </Link>
                ))
             ) : (
-               <p className="loading-text">Loading movies...</p>
+               <p className="loading-text">No movies found.</p>
             )}
          </div>
 

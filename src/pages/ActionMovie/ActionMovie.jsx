@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './ActionMovie.css'; // Reuse the same styles
+import './ActionMovie.css';
 import { Link } from 'react-router';
+import { useSpinner } from '../../Provider/SpinnerContext'; // 🌀 import useSpinner
 
 const Action = () => {
    const [actionMovies, setActionMovies] = useState([]);
    const [page, setPage] = useState(1);
-   const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
+   const { loading, setLoading } = useSpinner(); // 🌀 use global spinner
 
    const options = {
       method: 'GET',
@@ -16,25 +17,28 @@ const Action = () => {
       }
    };
 
-   const fetchActionMovies = () => {
+   const fetchActionMovies = async () => {
       setLoading(true);
       setError(null);
 
-      fetch(`https://api.themoviedb.org/3/discover/movie?language=en-US&page=${page}&with_genres=28`, options)
-         .then(res => res.json())
-         .then(res => {
-            if (Array.isArray(res.results)) {
-               setActionMovies(res.results);
-            } else {
-               setActionMovies([]);
-            }
-         })
-         .catch(err => {
-            console.error('Failed to fetch action movies:', err);
-            setError('Failed to load movies.');
+      const delay = new Promise(resolve => setTimeout(resolve, 1500)); // ⏱️ 1.5s spinner delay
+
+      try {
+         const res = await fetch(`https://api.themoviedb.org/3/discover/movie?language=en-US&page=${page}&with_genres=28`, options);
+         const data = await res.json();
+         if (Array.isArray(data.results)) {
+            setActionMovies(data.results);
+         } else {
             setActionMovies([]);
-         })
-         .finally(() => setLoading(false));
+         }
+      } catch (err) {
+         console.error('Failed to fetch action movies:', err);
+         setError('Failed to load movies.');
+         setActionMovies([]);
+      }
+
+      await delay;
+      setLoading(false);
    };
 
    useEffect(() => {
@@ -47,7 +51,7 @@ const Action = () => {
          <span className='section-hr'></span>
 
          {loading ? (
-            <div>Loading...</div>
+            <div className="spinner">Loading...</div>
          ) : error ? (
             <div>{error}</div>
          ) : (

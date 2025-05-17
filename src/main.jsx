@@ -4,7 +4,10 @@ import App from './App.jsx'
 import "./index.css"
 import { RouterProvider } from 'react-router'
 import { router } from './Routes/Router.jsx'
+import { SpinnerProvider } from './Provider/SpinnerContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+  <SpinnerProvider>
+    <RouterProvider router={router} />
+  </SpinnerProvider>
 )
