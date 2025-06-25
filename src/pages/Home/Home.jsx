@@ -3,6 +3,7 @@ import "./Home.css"
 import Navbar from '../../components/Navbar/Navbar'
 import hero_banner from "../../assets/hero_banner.jpg"
 import TitleCards from '../../components/TitleCard/TitleCards'
+import { Link } from 'react-router';
 
 const Home = () => {
    return (
@@ -16,7 +17,7 @@ const Home = () => {
                <p className='hero-subtitle'>
                   Stream Blockbusters, Trending Shows, and Exclusives — All in One Place.
                </p>
-               <button className='hero-btn'>Start Watching</button>
+               <Link to={'all-movies'} className='hero-btn'>Start Watching</Link>
             </div>
          </div>
 

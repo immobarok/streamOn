@@ -1,17 +1,19 @@
-import './Navbar.css'
-import search_icon from '../../assets/search_icon.svg'
-import bell_icon from '../../assets/bell_icon.svg'
-import profile_img from '../../assets/profile_img.png'
-import caret_icon from '../../assets/caret_icon.svg'
-import logo from '../../assets/streamOn.png'
-import { useEffect, useRef, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router'
+import './Navbar.css';
+import search_icon from '../../assets/search_icon.svg';
+import bell_icon from '../../assets/bell_icon.svg';
+import profile_img from '../../assets/profile_img.png';
+import caret_icon from '../../assets/caret_icon.svg';
+import logo from '../../assets/streamOn.png';
+import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router';
+import { useSearch } from '../../Provider/SearchContext';
 
 const Navbar = () => {
    const navRef = useRef();
    const genreRef = useRef();
    const navigate = useNavigate();
    const [genreDropdownOpen, setGenreDropdownOpen] = useState(false);
+   const { searchQuery, setSearchQuery } = useSearch();
 
    useEffect(() => {
       const handleScroll = () => {
@@ -40,6 +42,14 @@ const Navbar = () => {
    const handleGenreNavigation = (path) => {
       navigate(path);
       setGenreDropdownOpen(false);
+   };
+
+   const handleSearchSubmit = (e) => {
+      e.preventDefault();
+      const trimmed = searchQuery.trim();
+      if (trimmed) {
+         navigate(`/search?q=${encodeURIComponent(trimmed)}`);
+      }
    };
 
    return (
@@ -77,8 +87,13 @@ const Navbar = () => {
 
          <div className='navbar-right'>
             <div className='search-bar'>
-               <form onSubmit={(e) => e.preventDefault()}>
-                  <input type='text' placeholder='Search Movies Here...' />
+               <form onSubmit={handleSearchSubmit}>
+                  <input
+                     type='text'
+                     placeholder='Search Movies Here...'
+                     value={searchQuery}
+                     onChange={(e) => setSearchQuery(e.target.value)}
+                  />
                   <button type="submit">
                      <img src={search_icon} alt='Search' />
                   </button>
@@ -89,12 +104,12 @@ const Navbar = () => {
                <img className='profile' src={profile_img} alt='Profile' />
                <img className='profile-caret' src={caret_icon} alt='Dropdown Icon' />
                <div className='dropdown'>
-                  <p>Sign Out</p>
+                  <Link to={'/login'} className='signout-link'>Login</Link>
                </div>
             </div>
          </div>
       </div>
-   )
-}
+   );
+};
 
-export default Navbar
+export default Navbar;

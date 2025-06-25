@@ -1,7 +1,7 @@
 .home {
   background-color: #0f0f0f;
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 /* Hero Section */
@@ -34,7 +34,7 @@
 .hero-title {
   font-size: 3rem;
   font-weight: bold;
-  
+
   margin-bottom: 15px;
   font-family: "Bebas Neue", sans-serif !important;
 }
@@ -63,6 +63,7 @@
   transition: background 0.3s ease;
   font-family: "Bebas Neue", sans-serif !important;
   letter-spacing: 1px;
+  text-decoration: none;
 }
 
 .hero-btn:hover {
@@ -71,7 +72,7 @@
 
 /* Background Gradient Overlay */
 .hero::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
